@@ -9,7 +9,9 @@ from game.handle_collisions_action import HandleCollisionsAction
 from game.move_actors_action import MoveActorsAction
 from game.input_service import InputService
 from game.output_service import OutputService
-from asciimatics.screen import Screen 
+from asciimatics.screen import Screen
+from game.randomize_positions import RandomizePositionsAction
+ 
 
 def main(screen):
 
@@ -23,7 +25,7 @@ def main(screen):
 
     x = int(constants.MAX_X / 2)
     y = int(constants.MAX_Y / 2)
-    position = Point(x, y)
+    position = Point(2, 5)
     robot = Actor()
     robot.set_text("#")
     robot.set_position(position)
@@ -52,9 +54,10 @@ def main(screen):
     move_actors_action = MoveActorsAction()
     handle_collisions_action = HandleCollisionsAction()
     draw_actors_action = DrawActorsAction(output_service)
+    randomize_positions = RandomizePositionsAction()
 
     script["input"] = [control_actors_action]
-    script["update"] = [move_actors_action, handle_collisions_action]
+    script["update"] = [randomize_positions, move_actors_action, handle_collisions_action]
     script["output"] = [draw_actors_action]
 
     # start the game
