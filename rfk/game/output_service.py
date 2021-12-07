@@ -1,6 +1,7 @@
 import sys
 from game import constants
 from asciimatics.widgets import Frame
+from game import constants_2
 
 class OutputService:
     """Outputs the game state. The responsibility of the class of objects is to draw the game state on the terminal. 
@@ -23,8 +24,8 @@ class OutputService:
     def clear_screen(self):
         """Clears the Asciimatics buffer for the next rendering.""" 
         self._screen.clear_buffer(7, 0, 0)
-        self._screen.print_at("-" * constants.MAX_X, 0, 0, 7)
-        self._screen.print_at("-" * constants.MAX_X, 0, constants.MAX_Y, 7)
+        self._screen.print_at("-" * constants_2.MAX_X, 0, 0, 7)
+        self._screen.print_at("-" * constants_2.MAX_X, 0, constants_2.MAX_Y, 7)
         
     def draw_actor(self, actor):
         """Renders the given actor's text on the screen.
@@ -32,11 +33,14 @@ class OutputService:
         Args:
             actor (Actor): The actor to render.
         """ 
-        text = actor.get_text()
-        position = actor.get_position()
-        x = position.get_x()
-        y = position.get_y()
-        self._screen.print_at(text, x, y, 7) # WHITE
+        if actor.ishidden():
+            return
+        else:
+            text = actor.get_text()
+            position = actor.get_position()
+            x = position.get_x()
+            y = position.get_y()
+            self._screen.print_at(text, x, y, 7) # WHITE
 
     def draw_actors(self, actors):
         """Renders the given list of actors on the screen.

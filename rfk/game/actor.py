@@ -21,6 +21,7 @@ class Actor:
         self._text = ""
         self._position = Point(0, 0)
         self._velocity = Point(0, 0)
+        self.visibility = 'yes'
 
     def get_description(self):
         """Gets the artifact's description.
@@ -85,3 +86,13 @@ class Actor:
             position (Point): The given velocity.
         """
         self._velocity = velocity
+    
+    def hide(self):
+        self.visibility = 'no'
+
+    def unhide(self):
+        self.visibility = 'yes'
+    
+    def ishidden(self):
+        if self.visibility == 'no':
+            return True
